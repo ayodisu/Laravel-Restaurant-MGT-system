@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\models\Food\Food;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $breakfastFoods = Food::select()->take(4)->where('category', 'Breakfast')->orderby('id', 'desc')->get();
+
+        $lunchFoods = Food::select()->take(4)->where('category', 'Lunch')->orderby('id', 'desc')->get();
+
+        $dinnerFoods = Food::select()->take(4)->where('category', 'Dinner')->orderby('id', 'desc')->get();
+        return view('home', compact('breakfastFoods', 'lunchFoods', 'dinnerFoods'));
     }
 }
