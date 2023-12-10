@@ -8,8 +8,9 @@ use App\models\Food\Food;
 
 class FoodController extends Controller
 {
-    // public function index() 
-    // {
-   
-    // }
+    public function foodDetails($id) 
+    {
+        $foodItem = Food::find($id);
+        return view('food.food-details', compact('foodItem'));
+    }
 }

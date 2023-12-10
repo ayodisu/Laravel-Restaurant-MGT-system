@@ -164,7 +164,7 @@
                                             <span class="text-primary">${{$breakfastFood->price}}</span>
                                         </h5>
                                         <small class="fst-italic">{{substr($breakfastFood->description, 0, 70)}}</small>
-                                        <a type="button" href="add-cart.html" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
+                                        <a type="button" href="{{ route('food.details', $breakfastFood->id) }}" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
                                     </div>
                                 </div>
                             </div>  
@@ -183,7 +183,7 @@
                                             <span class="text-primary">${{$lunchFood->price}}</span>
                                         </h5>
                                         <small class="fst-italic">{{ substr($lunchFood->description, 0, 70)}}</small>
-                                        <a type="button" href="add-cart.html" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
+                                        <a type="button" href="{{ route('food.details', $lunchFood->id) }}" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
                                     </div>
                                 </div>
                             </div>  
@@ -204,7 +204,7 @@
                                         <span class="text-primary">${{ $dinnerFood->price }}</span>
                                     </h5>
                                     <small class="fst-italic">{{ substr($dinnerFood->description, 0, 70) }}</small>
-                                    <a type="button" href="add-cart.html" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
+                                    <a type="button" href="{{ route('food.details', $dinnerFood->id) }}" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
                                 </div>
                             </div>
                         </div>
