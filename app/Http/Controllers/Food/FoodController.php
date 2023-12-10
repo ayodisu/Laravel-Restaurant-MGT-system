@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Food;
 
 use App\Http\Controllers\Controller;
 use App\Models\Food\Cart;
+use App\Models\Food\Checkout;
 use Illuminate\Http\Request;
 use App\models\Food\Food;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session as FacadesSession;
 
 class FoodController extends Controller
 {
@@ -15,10 +17,7 @@ class FoodController extends Controller
         $foodItem = Food::find($id);
 
         //verifying if user added item to cart
-
         $cartVerifying = Cart::where('food_id', $id)->where('user_id', Auth::user()->id)->count();
-
-
         
         return view('food.food-details', compact('foodItem', 'cartVerifying'));
     }
@@ -75,4 +74,45 @@ class FoodController extends Controller
             return redirect()->route('food.display.cart')->with(['delete' => 'Items deleted successfully']);
         }
     }
+
+    public function prepareCheckout(Request $request, $id) 
+    {
+        $value = $request->price;
+        $price = session(['price' => $value]);
+        $newPrice = FacadesSession::get('price');
+
+        if($newPrice > 0) {
+            return redirect()->route('food.checkout');
+        }
+    }
+
+    public function checkout() 
+    {
+        return view('food.checkout');
+    }
+
+
+    public function storeCheckout(Request $request) 
+    {
+        $checkout = Checkout::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "town" => $request->town,
+            "country" => $request->country,
+            "phone_number" => $request->phone_number,
+            "address" => $request->address,
+            "user_id" => Auth::user()->id,
+            "price" => $request->price,
+
+        ]);
+
+        echo "paypal";
+
+        // if($cart) {
+        //     return redirect()->route('food.details', $id)->with(['success' => 'Items added to cart successfully']);
+        // }
+
+        // return view('food.food-details', compact('foodItem'));
+    }
+
 }

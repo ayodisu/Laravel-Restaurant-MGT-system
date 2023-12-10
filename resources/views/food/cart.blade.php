@@ -51,9 +51,14 @@
 				  <div class="position-relative mx-auto" style="max-width: 400px; padding-left: 679px;">
 					<p style="margin-left: -7px;" class="w-19 py-3 ps-4 pe-5" type="text"> Total: ${{ $price }}</p>
 					@if ($price > 0)
-						<button type="button" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">Checkout</button>
-					@endif
+					<form action="{{ route('prepare.checkout', ['id' => $price]) }}" method="POST">
+						@csrf
+						<input type="text" value="{{ $price }}" name="price">
+						<button type="submit" name="submit" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">Checkout</button>
+					</form>
 					
+						
+					@endif					
 				</div>
 			</div>
 		</div>
