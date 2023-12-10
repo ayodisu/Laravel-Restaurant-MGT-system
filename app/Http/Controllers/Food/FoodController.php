@@ -39,4 +39,33 @@ class FoodController extends Controller
 
         // return view('food.food-details', compact('foodItem'));
     }
+
+
+    public function displayCartItems() 
+    {
+
+        //display cart items
+        $cartItems = Cart::where('user_id', Auth::user()->id)->get();
+
+        //display price
+        $price = Cart::where('user_id', Auth::user()->id)->sum('price');
+
+
+        
+        return view('food.cart', compact('cartItems', 'price'));
+    }
+
+
+    public function deleteCartItems($id) 
+    {
+
+        //delete cart items
+        $deleteItem = Cart::where('user_id', Auth::user()->id)->where('food_id', $id);
+
+        $deleteItem->delete();
+        
+        if($deleteItem) {
+            return redirect()->route('food.display.cart')->with(['delete' => 'Items deleted successfully']);
+        }
+    }
 }
