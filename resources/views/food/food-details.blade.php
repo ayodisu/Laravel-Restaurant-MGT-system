@@ -13,7 +13,11 @@
 		</nav>
 	</div>
 </div>
-
+<div class="container">
+	@if(Session::has('success'))
+	<p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
+	@endif
+</div>
 <!-- Service Start -->
 <div class="container-xxl py-5">
 	<div class="container">
@@ -37,7 +41,19 @@
 					</div>
 				   
 				</div>
-				<a class="btn btn-primary py-3 px-5 mt-2" href="">Add to Cart</a>
+				<form action="{{ route('food.cart', ['id' => $foodItem->id]) }}" method="POST">
+					@csrf
+					<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+					<input type="hidden" name="food_id" value="{{ $foodItem->id }}">
+					<input type="hidden" name="name" value="{{ $foodItem->name }}">
+					<input type="hidden" name="image" value="{{ $foodItem->image }}">
+					<input type="hidden" name="price" value="{{ $foodItem->price }}">
+					@if($cartVerifying > 0)
+						<button class="btn btn-primary py-3 px-5 mt-2" disabled>Added to Cart</button>
+					@else
+						<button type="submit" name="submit" class="btn btn-primary py-3 px-5 mt-2">Add to Cart</button>
+					@endif
+				</form>
 			</div>
 		</div>
 	</div>

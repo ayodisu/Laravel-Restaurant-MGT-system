@@ -5,19 +5,20 @@ namespace App\Models\Food;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Food extends Model
+class Cart extends Model
 {
     use HasFactory;
-    
-    protected $table = "foods";
+
+    protected $table = "cart";
 
     protected $fillable = [
+        'user_id',
+        'food_id',
         'name',
-        'price',
-        'category',
-        'description',
         'image',
+        'price',
     ];
 
     public $timestamps = true;
+
 }
