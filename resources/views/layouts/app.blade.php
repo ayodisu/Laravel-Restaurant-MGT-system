@@ -57,7 +57,7 @@
                         <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <a href="menu.html" class="nav-item nav-link">Menu</a>
-                        <a href="{{ route('food.display.cart') }}" class="nav-item nav-link"><i class="fa-sharp fa-solid fa-cart-shopping"></i>Cart</a>
+                        
 
                       
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -71,6 +71,7 @@
                                     <a href="{{route('register')}}" class="nav-item nav-link">Register</a>
                                 @endif
                             @else
+                              <a href="{{ route('food.display.cart') }}" class="nav-item nav-link"><i class="fa-sharp fa-solid fa-cart-shopping"></i>Cart</a>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }}
