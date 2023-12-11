@@ -53,7 +53,7 @@
 					@if ($price > 0)
 					<form action="{{ route('prepare.checkout', ['id' => $price]) }}" method="POST">
 						@csrf
-						<input type="text" value="{{ $price }}" name="price">
+						<input type="hidden" value="{{ $price }}" name="price">
 						<button type="submit" name="submit" class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">Checkout</button>
 					</form>
 					

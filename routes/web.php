@@ -36,3 +36,7 @@
     //Insert user info Routes
     Route::get('food/checkout', [App\Http\Controllers\Food\FoodController::class, 'checkout'])->name('food.checkout');
     Route::post('food/checkout', [App\Http\Controllers\Food\FoodController::class, 'storeCheckout'])->name('food.checkout.store');
+
+    //Paypal Route
+    Route::get('food/pay', [App\Http\Controllers\Food\FoodController::class, 'pay'])->name('food.pay');
+    Route::get('food/success', [App\Http\Controllers\Food\FoodController::class, 'success'])->name('food.success');

@@ -68,8 +68,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" name="price" value="{{ Session::get('price') }}" id="email" placeholder="Phone number">
-                                <label for="message">Address</label>
+                                <input type="hidden" class="form-control" name="price" value="{{ Session::get('price') }}" id="email" placeholder="Phone number">
                             </div>
                         </div>
                         <div class="col-12">
