@@ -40,3 +40,6 @@
     //Paypal Route
     Route::get('food/pay', [App\Http\Controllers\Food\FoodController::class, 'pay'])->name('food.pay');
     Route::get('food/success', [App\Http\Controllers\Food\FoodController::class, 'success'])->name('food.success');
+
+    //Booking Table Route
+    Route::post('food/booking', [App\Http\Controllers\Food\FoodController::class, 'bookingTables'])->name('food.booking.table');

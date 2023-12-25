@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Food;
 use App\Http\Controllers\Controller;
 use App\Models\Food\Cart;
 use App\Models\Food\Checkout;
+use App\Models\Food\Booking;
 use Illuminate\Http\Request;
 use App\models\Food\Food;
 use Illuminate\Support\Facades\Auth;
@@ -168,5 +169,44 @@ class FoodController extends Controller
         
 
         return view('food.pay');
+    }
+
+
+    public function bookingTables(Request $request)
+    {
+
+        Request()->validate([
+
+            "name" => "required|max:40",
+            "email" => "required|max:40",
+            "date" => "required",
+            "num_people" => "required",
+            "spe_request" => "required"
+
+        ]);
+
+        $currentDate = date('m/d/Y h:i A');
+
+        if ($request->date == $currentDate || $request->date < $currentDate) { // '|' is shorthand for 'OR'
+            
+            return redirect()->route('home')->with(['error' => 'Date Unavailable']);
+
+        }else {
+            
+        $bookingTables = Booking::create([
+            "user_id" => Auth::user()->id,
+            "name" => $request->name,
+            "email" => $request->email,
+            "date" => $request->date,
+            "num_people" => $request->num_people,
+            "spe_request" => $request->spe_request,
+
+        ]);
+
+        if($bookingTables) {
+            
+            return redirect()->route('home')->with(['booked' => 'Table booked']);
+        }
+        }
     }
 }
