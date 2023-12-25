@@ -187,7 +187,7 @@ class FoodController extends Controller
 
         $currentDate = date('m/d/Y h:i A');
 
-        if ($request->date == $currentDate || $request->date < $currentDate) { // '|' is shorthand for 'OR'
+        if ($request->date == $currentDate || $request->date < $currentDate) { // '||' is shorthand for 'OR'
             
             return redirect()->route('home')->with(['error' => 'Date Unavailable']);
 
@@ -208,5 +208,17 @@ class FoodController extends Controller
             return redirect()->route('home')->with(['booked' => 'Table booked']);
         }
         }
+    }
+
+
+    
+    public function menu()
+    {
+        $breakfastFoods = Food::select()->take(4)->where('category', 'Breakfast')->orderby('id', 'desc')->get();
+
+        $lunchFoods = Food::select()->take(4)->where('category', 'Lunch')->orderby('id', 'desc')->get();
+
+        $dinnerFoods = Food::select()->take(4)->where('category', 'Dinner')->orderby('id', 'desc')->get();
+        return view('food.menu', compact('breakfastFoods', 'lunchFoods', 'dinnerFoods'));
     }
 }

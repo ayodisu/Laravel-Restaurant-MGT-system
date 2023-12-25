@@ -43,3 +43,9 @@
 
     //Booking Table Route
     Route::post('food/booking', [App\Http\Controllers\Food\FoodController::class, 'bookingTables'])->name('food.booking.table');
+
+    //Menu Route
+    Route::get('food/menu', [App\Http\Controllers\Food\FoodController::class, 'menu'])->name('food.menu');
+
+    //Users Route
+    Route::get('users/all-bookings', [App\Http\Controllers\Users\UsersController::class, 'getBookings'])->name('users.bookings');
