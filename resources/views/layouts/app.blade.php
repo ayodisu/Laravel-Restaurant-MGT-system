@@ -56,10 +56,7 @@
                         <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
                         <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
-                        <a href="menu.html" class="nav-item nav-link">Menu</a>
-                        
-
-                      
+                        <a href="menu.html" class="nav-item nav-link">Menu</a>                      
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
