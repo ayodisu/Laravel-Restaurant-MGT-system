@@ -36,7 +36,7 @@
                             <td>{{ $booking->date }}</td>
                             <td>{{ $booking->status }}</td>
 							@if ($booking->status == "Booked")
-		                        <td><a href="#" class="btn btn-success">review</a></td>
+		                        <td><a href="{{ route('users.review.create') }}" class="btn btn-success">review</a></td>
 							@else
 								<td>Unavailable</td>
 							@endif

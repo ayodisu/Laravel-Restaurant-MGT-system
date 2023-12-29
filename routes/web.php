@@ -50,3 +50,7 @@
     //Users Route
     Route::get('users/all-bookings', [App\Http\Controllers\Users\UsersController::class, 'getBookings'])->name('users.bookings');
     Route::get('users/all-orders', [App\Http\Controllers\Users\UsersController::class, 'getOrders'])->name('users.orders');
+
+    //Reviews Route
+    Route::get('users/write-review', [App\Http\Controllers\Users\UsersController::class, 'viewReview'])->name('users.review.create');
+    Route::post('users/write-review', [App\Http\Controllers\Users\UsersController::class, 'submitReview'])->name('users.review.store');
