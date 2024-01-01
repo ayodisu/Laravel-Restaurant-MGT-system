@@ -12,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -32,5 +32,23 @@ class HomeController extends Controller
 
         $reviews = Review::select()->take(4)->orderby('id', 'desc')->get();
         return view('home', compact('breakfastFoods', 'lunchFoods', 'dinnerFoods', 'reviews'));
+    }
+
+    public function about()
+    {
+        
+        return view('pages.about');
+    }
+
+    public function services()
+    {
+        
+        return view('pages.services');
+    }
+
+    public function contact()
+    {
+        
+        return view('pages.contact');
     }
 }

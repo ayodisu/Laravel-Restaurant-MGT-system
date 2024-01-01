@@ -14,43 +14,53 @@
     |
     */
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    // Route::get('/', function () {
+    //     return view('welcome');
+    // });
 
     Auth::routes();
-
+    //Homepage routes
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
+    Route::get('/services', [App\Http\Controllers\HomeController::class, 'services'])->name('services');
+    Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 
-    //Product Display Route
-    Route::get('food/food-details/{id}', [App\Http\Controllers\Food\FoodController::class, 'foodDetails'])->name('food.details');
+    Route::group(["prefix" => 'food'], function(){
 
-    //Cart Routes
-    Route::post('food/food-details/{id}', [App\Http\Controllers\Food\FoodController::class, 'cart'])->name('food.cart');
-    Route::get('food/cart', [App\Http\Controllers\Food\FoodController::class, 'displayCartItems'])->name('food.display.cart');
-    Route::get('food/delete-cart/{id}', [App\Http\Controllers\Food\FoodController::class, 'deleteCartItems'])->name('food.delete.cart');
+        //Product Display Route
+        Route::get('/food-details/{id}', [App\Http\Controllers\Food\FoodController::class, 'foodDetails'])->name('food.details');
 
-    //Checkout Routes
-    Route::post('food/prepare-checkout/{id}', [App\Http\Controllers\Food\FoodController::class, 'prepareCheckout'])->name('prepare.checkout');
+        //Cart Routes
+        Route::post('/food-details/{id}', [App\Http\Controllers\Food\FoodController::class, 'cart'])->name('food.cart');
+        Route::get('/cart', [App\Http\Controllers\Food\FoodController::class, 'displayCartItems'])->name('food.display.cart');
+        Route::get('/delete-cart/{id}', [App\Http\Controllers\Food\FoodController::class, 'deleteCartItems'])->name('food.delete.cart');
 
-    //Insert user info Routes
-    Route::get('food/checkout', [App\Http\Controllers\Food\FoodController::class, 'checkout'])->name('food.checkout');
-    Route::post('food/checkout', [App\Http\Controllers\Food\FoodController::class, 'storeCheckout'])->name('food.checkout.store');
+        //Checkout Routes
+        Route::post('/prepare-checkout/{id}', [App\Http\Controllers\Food\FoodController::class, 'prepareCheckout'])->name('prepare.checkout');
 
-    //Paypal Route
-    Route::get('food/pay', [App\Http\Controllers\Food\FoodController::class, 'pay'])->name('food.pay');
-    Route::get('food/success', [App\Http\Controllers\Food\FoodController::class, 'success'])->name('food.success');
+        //Insert user info Routes
+        Route::get('/checkout', [App\Http\Controllers\Food\FoodController::class, 'checkout'])->name('.checkout');
+        Route::post('/checkout', [App\Http\Controllers\Food\FoodController::class, 'storeCheckout'])->name('food.checkout.store');
 
-    //Booking Table Route
-    Route::post('food/booking', [App\Http\Controllers\Food\FoodController::class, 'bookingTables'])->name('food.booking.table');
+        //Paypal Route
+        Route::get('/pay', [App\Http\Controllers\Food\FoodController::class, 'pay'])->name('food.pay');
+        Route::get('/success', [App\Http\Controllers\Food\FoodController::class, 'success'])->name('food.success');
 
-    //Menu Route
-    Route::get('food/menu', [App\Http\Controllers\Food\FoodController::class, 'menu'])->name('food.menu');
+        //Booking Table Route
+        Route::post('/booking', [App\Http\Controllers\Food\FoodController::class, 'bookingTables'])->name('food.booking.table');
 
-    //Users Route
-    Route::get('users/all-bookings', [App\Http\Controllers\Users\UsersController::class, 'getBookings'])->name('users.bookings');
-    Route::get('users/all-orders', [App\Http\Controllers\Users\UsersController::class, 'getOrders'])->name('users.orders');
+        //Menu Route
+        Route::get('/menu', [App\Http\Controllers\Food\FoodController::class, 'menu'])->name('food.menu');
+    });
 
-    //Reviews Route
-    Route::get('users/write-review', [App\Http\Controllers\Users\UsersController::class, 'viewReview'])->name('users.review.create');
-    Route::post('users/write-review', [App\Http\Controllers\Users\UsersController::class, 'submitReview'])->name('users.review.store');
+    Route::group(["prefix" => 'users'], function() {
+
+        //Users Route
+        Route::get('/all-bookings', [App\Http\Controllers\Users\UsersController::class, 'getBookings'])->name('users.bookings');
+        Route::get('users/all-orders', [App\Http\Controllers\Users\UsersController::class, 'getOrders'])->name('users.orders');
+
+        //Reviews Route
+        Route::get('/write-review', [App\Http\Controllers\Users\UsersController::class, 'viewReview'])->name('users.review.create');
+        Route::post('/write-review', [App\Http\Controllers\Users\UsersController::class, 'submitReview'])->name('users.review.store');
+    });

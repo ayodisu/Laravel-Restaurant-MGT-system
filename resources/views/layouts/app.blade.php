@@ -54,10 +54,10 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
+                        <a href="{{ route('services') }}" class="nav-item nav-link">Service</a>
                         <a href="{{ route('food.menu') }}" class="nav-item nav-link">Menu</a>                      
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
                             @guest
