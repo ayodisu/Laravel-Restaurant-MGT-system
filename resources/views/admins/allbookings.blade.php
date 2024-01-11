@@ -6,6 +6,16 @@
 	<div class="col">
 	  <div class="card">
 		<div class="card-body">
+			<div class="container">
+				@if(Session::has('success'))
+				<p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
+				@endif
+			</div>
+			<div class="container">
+				@if(Session::has('deleted'))
+				<p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('deleted') }}</p>
+				@endif
+			</div>
 		  <h5 class="card-title mb-4 d-inline">Bookings</h5>
 		
 		  <div class="table-responsive">
@@ -34,9 +44,9 @@
 				<td>{{ $booking->num_people }}</td>
 				<td>{{ $booking->spe_request }}</td>
 				<td>{{ $booking->status }}</td>
-				<td><a href="#" class="btn btn-warning text-white  text-center ">change status</a></td>
+				<td><a href="{{ route('bookings.edit', $booking->id) }}" class="btn btn-warning text-white  text-center ">change status</a></td>
 				<td>{{ $booking->created_at }}</td>
-				 <td><a href="delete-bookings.html" class="btn btn-danger  text-center ">delete</a></td>
+				<td><a href="{{ route('bookings.delete', $booking->id) }}" class="btn btn-danger btn-sm text-center">Delete</a></td>
 			  </tr>
 				@endforeach
 			  

@@ -77,7 +77,7 @@ class AdminsController extends Controller
 
     }
 
-    //Admins
+    //orders
     public function allOrders()
     {
         $orders = Checkout::select()->orderBy('id', 'desc')->get();
@@ -112,10 +112,38 @@ class AdminsController extends Controller
         }
     }
 
+    //Bookings
     public function allBookings()
     {
         $bookings = Booking::select()->orderBy('id', 'desc')->get();
 
         return view('admins.allbookings', compact('bookings'));
+    }
+
+    public function editBookings($id)
+    {
+        $bookings = Booking::find($id);
+
+        return view('admins.editbookings', compact('bookings'));
+    }
+
+    public function updateBookings(Request $request, $id)
+    {
+        $bookings = Booking::find($id);
+        $bookings->update($request->all());
+
+        if ($bookings) {
+            return redirect()->route('bookings.all')->with(['success' => 'Updated!']);
+        }
+    }
+
+    public function deleteBookings($id)
+    {
+        $bookings = Booking::find($id);
+        $bookings->delete();
+
+        if ($bookings) {
+            return redirect()->route('bookings.all')->with(['success' => 'Deleted!']);
+        }
     }
 }
