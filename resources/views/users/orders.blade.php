@@ -30,18 +30,18 @@
                 </thead>
                 <tbody>
                     @foreach ($allOrders as $order)
-					<tr>
-							<td>{{ $order->name }}</td>
-							<td>{{ $order->email }}</td>
+                        <tr>
+                            <td>{{ $order->name }}</td>
+                            <td>{{ $order->email }}</td>
                             <td>{{ $order->town }}</td>
                             <td>{{ $order->phone_number }}</td>
                             <td>${{ $order->price }}</td>
                             <td>{{ $order->status }}</td>
-							@if ($order->status == "Ordered")
-		                        <td><a href="{{ route('users.review.create') }}" class="btn btn-success">review</a></td>
-							@else
-								<td>Unavailable</td>
-							@endif
+                            @if ($order->status == 'Ordered')
+                                <td><a href="{{ route('users.review.create') }}" class="btn btn-success">review</a></td>
+                            @else
+                                <td>Unavailable</td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

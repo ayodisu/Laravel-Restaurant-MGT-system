@@ -40,7 +40,7 @@ Route::group(["prefix" => 'food'], function () {
     Route::post('/prepare-checkout/{id}', [App\Http\Controllers\Food\FoodController::class, 'prepareCheckout'])->name('prepare.checkout');
 
     //Insert user info Routes
-    Route::get('/checkout', [App\Http\Controllers\Food\FoodController::class, 'checkout'])->name('.checkout');
+    Route::get('/checkout', [App\Http\Controllers\Food\FoodController::class, 'checkout'])->name('food.checkout');
     Route::post('/checkout', [App\Http\Controllers\Food\FoodController::class, 'storeCheckout'])->name('food.checkout.store');
 
     //Paypal Route
@@ -79,4 +79,14 @@ Route::group(["prefix" => 'admin', "middleware" => 'auth:admin'], function () {
     Route::get('all-admins', [App\Http\Controllers\Admins\AdminsController::class, 'allAdmins'])->name('admins.all');
     Route::get('all-create', [App\Http\Controllers\Admins\AdminsController::class, 'createAdmins'])->name('admins.create');
     Route::post('all-create', [App\Http\Controllers\Admins\AdminsController::class, 'storeAdmins'])->name('admins.store');
+
+    // Orders
+    Route::get('all-orders', [App\Http\Controllers\Admins\AdminsController::class, 'allOrders'])->name('orders.all');
+    Route::get('edit-orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'editOrders'])->name('orders.edit');
+    Route::post('edit-orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'updateOrders'])->name('orders.update');
+    Route::get('delete-orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteOrders'])->name('orders.delete');
+
+    // Bookings
+    Route::get('all-bookings', [App\Http\Controllers\Admins\AdminsController::class, 'allBookings'])->name('bookings.all');
+
 });

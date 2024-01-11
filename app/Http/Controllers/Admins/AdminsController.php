@@ -76,4 +76,46 @@ class AdminsController extends Controller
         }
 
     }
+
+    //Admins
+    public function allOrders()
+    {
+        $orders = Checkout::select()->orderBy('id', 'desc')->get();
+
+        return view('admins.allorders', compact('orders'));
+    }
+
+    public function editOrders($id)
+    {
+        $order = Checkout::find($id);
+
+        return view('admins.editorders', compact('order'));
+    }
+
+    public function updateOrders(Request $request, $id)
+    {
+        $order = Checkout::find($id);
+        $order->update($request->all());
+
+        if ($order) {
+            return redirect()->route('orders.all')->with(['success' => 'Updated!']);
+        }
+    }
+
+    public function deleteOrders($id)
+    {
+        $order = Checkout::find($id);
+        $order->delete();
+
+        if ($order) {
+            return redirect()->route('orders.all')->with(['success' => 'Deleted!']);
+        }
+    }
+
+    public function allBookings()
+    {
+        $bookings = Booking::select()->orderBy('id', 'desc')->get();
+
+        return view('admins.allbookings', compact('bookings'));
+    }
 }
